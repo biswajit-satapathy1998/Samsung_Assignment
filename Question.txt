@@ -1,0 +1,23 @@
+Scenario
+Neeraj at Karnataka Transportation Safety Authority is planning to set up traffic safety signs at places where a critical accident occurs and offer a safety guide to drivers in order to lessen the damage of a car accident.
+He wants to analyze which driving conditions (road condition, speed limit, illumination, day of week et al) are more prone to a critical accident and come up with countermeasures.
+Thus, he is planning to create and compare tree-based classifiers by training with the past accidents over the year and identify key variables.
+
+
+
+Objectives
+ - Use Tree-based functions to analyze the severity of traffic accidents and identify key variables
+ - Use Split Data to separate training and validation data
+ - Run repetitive statements to find an optimal depth of Decision Tree and Evaluate Multiclass Classification to compare performance by depth and find an optimal depth
+ - Use Decision Tree (for depth optimization) and Random Forest (default) function to train a learning model for traffic accident data and evaluate the model performance using test data
+ - Use Binary Classification to validate the accuracy of respective models
+ - Use filter to retain only key variables at each tree’s top node of Random Forest and sort and check key variables by assigning weight to the key variables 
+
+Deliverables 
+ - Provide a detail documentation about how the each objectives are achieved. 
+ - Based on finalised your model, provide a detail analysis, how Mr. Neeraj can identify the key variables which are responsible for accidents. 
+ - Documented Python code need to be sent
+
+Note: 
+ - Code and the documents should be attached in the mail. 
+ - Please do not provide the link to google colab or download option by any other means for the code. 
