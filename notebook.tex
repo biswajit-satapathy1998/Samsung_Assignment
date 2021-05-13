@@ -1,0 +1,1734 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Samsung\_Assignment}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \hypertarget{accident-severity-prediction}{%
+\section{Accident Severity
+Prediction}\label{accident-severity-prediction}}
+
+\hypertarget{introduction}{%
+\subsection{Introduction}\label{introduction}}
+
+Neeraj at Karnataka Transportation Safety Authority is planning to set
+up traffic safety signs at places where a critical accident occurs and
+offer a safety guide to drivers in order to lessen the damage of a car
+accident. He wants to analyze which driving conditions (road condition,
+speed limit, illumination, day of week et al) are more prone to a
+critical accident and come up with countermeasures. Thus, he is planning
+to create and compare tree-based classifiers by training with the past
+accidents over the year and identify key variables.
+
+\hypertarget{objectives}{%
+\subsection{Objectives}\label{objectives}}
+
+\begin{itemize}
+\tightlist
+\item
+  Use Tree-based functions to analyze the severity of traffic accidents
+  and identify key variables
+\item
+  Use Split Data to separate training and validation data
+\item
+  Run repetitive statements to find an optimal depth of Decision Tree
+  and Evaluate Multiclass Classification to compare performance by depth
+  and find an optimal depth
+\item
+  Use Decision Tree (for depth optimization) and Random Forest (default)
+  function to train a learning model for traffic accident data and
+  evaluate the model performance using test data
+\item
+  Use Binary Classification to validate the accuracy of respective
+  models
+\item
+  Use filter to retain only key variables at each tree's top node of
+  Random Forest and sort and check key variables by assigning weight to
+  the key variables
+
+  Let's get started\ldots..
+\end{itemize}
+
+\hypertarget{import-libraries}{%
+\subsection{1. Import Libraries}\label{import-libraries}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        
+        \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{model\PYZus{}selection} \PY{k}{import} \PY{n}{train\PYZus{}test\PYZus{}split}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{preprocessing} \PY{k}{import} \PY{n}{LabelEncoder}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{ensemble} \PY{k}{import} \PY{n}{RandomForestClassifier}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{tree} \PY{k}{import} \PY{n}{DecisionTreeClassifier}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{feature\PYZus{}selection} \PY{k}{import} \PY{n}{RFE}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{linear\PYZus{}model} \PY{k}{import} \PY{n}{LogisticRegression}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{model\PYZus{}selection} \PY{k}{import} \PY{n}{RandomizedSearchCV}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{naive\PYZus{}bayes} \PY{k}{import} \PY{n}{MultinomialNB}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{svm} \PY{k}{import} \PY{n}{LinearSVC}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{neighbors} \PY{k}{import} \PY{n}{KNeighborsClassifier}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{ensemble} \PY{k}{import} \PY{n}{AdaBoostClassifier}
+        
+        \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{preprocessing} \PY{k}{import} \PY{n}{MinMaxScaler}
+        \PY{k+kn}{from} \PY{n+nn}{scipy}\PY{n+nn}{.}\PY{n+nn}{special} \PY{k}{import} \PY{n}{boxcox1p}
+        
+        \PY{k+kn}{from} \PY{n+nn}{imblearn}\PY{n+nn}{.}\PY{n+nn}{over\PYZus{}sampling} \PY{k}{import} \PY{n}{SMOTE}
+        
+        \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{metrics} \PY{k}{import} \PY{n}{accuracy\PYZus{}score}
+        
+        \PY{k+kn}{import} \PY{n+nn}{seaborn} \PY{k}{as} \PY{n+nn}{sns}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+        \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+        
+        \PY{n}{pd}\PY{o}{.}\PY{n}{set\PYZus{}option}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{display.max\PYZus{}columns}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+m+mi}{28}\PY{p}{)}
+        \PY{n}{pd}\PY{o}{.}\PY{n}{set\PYZus{}option}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{display.max\PYZus{}rows}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+m+mi}{100}\PY{p}{)}
+        
+        \PY{k+kn}{import} \PY{n+nn}{warnings}
+        \PY{n}{warnings}\PY{o}{.}\PY{n}{filterwarnings}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ignore}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+c:\textbackslash{}users\textbackslash{}avenger\textbackslash{}appdata\textbackslash{}local\textbackslash{}programs\textbackslash{}python\textbackslash{}python36\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}sklearn\textbackslash{}utils\textbackslash{}deprecation.py:144: FutureWarning: The sklearn.neighbors.base module is  deprecated in version 0.22 and will be removed in version 0.24. The corresponding classes / functions should instead be imported from sklearn.neighbors. Anything that cannot be imported from sklearn.neighbors is now part of the private API.
+  warnings.warn(message, FutureWarning)
+c:\textbackslash{}users\textbackslash{}avenger\textbackslash{}appdata\textbackslash{}local\textbackslash{}programs\textbackslash{}python\textbackslash{}python36\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}sklearn\textbackslash{}utils\textbackslash{}deprecation.py:144: FutureWarning: The sklearn.ensemble.bagging module is  deprecated in version 0.22 and will be removed in version 0.24. The corresponding classes / functions should instead be imported from sklearn.ensemble. Anything that cannot be imported from sklearn.ensemble is now part of the private API.
+  warnings.warn(message, FutureWarning)
+c:\textbackslash{}users\textbackslash{}avenger\textbackslash{}appdata\textbackslash{}local\textbackslash{}programs\textbackslash{}python\textbackslash{}python36\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}sklearn\textbackslash{}utils\textbackslash{}deprecation.py:144: FutureWarning: The sklearn.ensemble.base module is  deprecated in version 0.22 and will be removed in version 0.24. The corresponding classes / functions should instead be imported from sklearn.ensemble. Anything that cannot be imported from sklearn.ensemble is now part of the private API.
+  warnings.warn(message, FutureWarning)
+c:\textbackslash{}users\textbackslash{}avenger\textbackslash{}appdata\textbackslash{}local\textbackslash{}programs\textbackslash{}python\textbackslash{}python36\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}sklearn\textbackslash{}utils\textbackslash{}deprecation.py:144: FutureWarning: The sklearn.ensemble.forest module is  deprecated in version 0.22 and will be removed in version 0.24. The corresponding classes / functions should instead be imported from sklearn.ensemble. Anything that cannot be imported from sklearn.ensemble is now part of the private API.
+  warnings.warn(message, FutureWarning)
+Using TensorFlow backend.
+c:\textbackslash{}users\textbackslash{}avenger\textbackslash{}appdata\textbackslash{}local\textbackslash{}programs\textbackslash{}python\textbackslash{}python36\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}sklearn\textbackslash{}utils\textbackslash{}deprecation.py:144: FutureWarning: The sklearn.utils.testing module is  deprecated in version 0.22 and will be removed in version 0.24. The corresponding classes / functions should instead be imported from sklearn.utils. Anything that cannot be imported from sklearn.utils is now part of the private API.
+  warnings.warn(message, FutureWarning)
+c:\textbackslash{}users\textbackslash{}avenger\textbackslash{}appdata\textbackslash{}local\textbackslash{}programs\textbackslash{}python\textbackslash{}python36\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}sklearn\textbackslash{}utils\textbackslash{}deprecation.py:144: FutureWarning: The sklearn.metrics.classification module is  deprecated in version 0.22 and will be removed in version 0.24. The corresponding classes / functions should instead be imported from sklearn.metrics. Anything that cannot be imported from sklearn.metrics is now part of the private API.
+  warnings.warn(message, FutureWarning)
+
+    \end{Verbatim}
+
+    \hypertarget{load-the-dataset}{%
+\subsection{2. Load the DataSet}\label{load-the-dataset}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{n}{data} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{60\PYZus{}car\PYZus{}accident\PYZus{}2016.csv}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{data}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}2}]:}   Accident\_Index  Accident\_Severity  First\_Road\_Class  Speed\_limit  \textbackslash{}
+        0  2016320136956                0.0               5.0         30.0   
+        1  2016010021162                0.0               3.0         30.0   
+        2  2016610051916                0.0               3.0         40.0   
+        3  2016100139498                0.0               4.0         30.0   
+        4  2016420087263                1.0               4.0         60.0   
+        
+           Light\_Conditions  Weather\_Conditions  Day\_of\_Week\_6  Day\_of\_Week\_5  \textbackslash{}
+        0               1.0                 1.0            0.0            0.0   
+        1               1.0                 1.0            0.0            0.0   
+        2               1.0                 2.0            0.0            0.0   
+        3               1.0                 1.0            0.0            0.0   
+        4               1.0                 1.0            0.0            0.0   
+        
+           Day\_of\_Week\_4  Day\_of\_Week\_3  Day\_of\_Week\_2  Day\_of\_Week\_7  Road\_Type\_6  \textbackslash{}
+        0            0.0            0.0            1.0            0.0          1.0   
+        1            1.0            0.0            0.0            0.0          1.0   
+        2            1.0            0.0            0.0            0.0          0.0   
+        3            1.0            0.0            0.0            0.0          1.0   
+        4            0.0            1.0            0.0            0.0          1.0   
+        
+           Road\_Type\_3  Road\_Type\_1  Road\_Type\_2  Road\_Type\_7  Junction\_Control\_4  \textbackslash{}
+        0          0.0          0.0          0.0          0.0                 1.0   
+        1          0.0          0.0          0.0          0.0                 0.0   
+        2          0.0          1.0          0.0          0.0                 1.0   
+        3          0.0          0.0          0.0          0.0                 1.0   
+        4          0.0          0.0          0.0          0.0                 1.0   
+        
+           Junction\_Control\_2  Junction\_Control\_3  Junction\_Control\_0  \textbackslash{}
+        0                 0.0                 0.0                 0.0   
+        1                 1.0                 0.0                 0.0   
+        2                 0.0                 0.0                 0.0   
+        3                 0.0                 0.0                 0.0   
+        4                 0.0                 0.0                 0.0   
+        
+           Road\_Surface\_Conditions\_1  Road\_Surface\_Conditions\_2  \textbackslash{}
+        0                        1.0                        0.0   
+        1                        1.0                        0.0   
+        2                        0.0                        1.0   
+        3                        1.0                        0.0   
+        4                        1.0                        0.0   
+        
+           Road\_Surface\_Conditions\_4  Road\_Surface\_Conditions\_3  \textbackslash{}
+        0                        0.0                        0.0   
+        1                        0.0                        0.0   
+        2                        0.0                        0.0   
+        3                        0.0                        0.0   
+        4                        0.0                        0.0   
+        
+           Urban\_or\_Rural\_Area\_1  Urban\_or\_Rural\_Area\_2  
+        0                    1.0                    0.0  
+        1                    1.0                    0.0  
+        2                    0.0                    1.0  
+        3                    1.0                    0.0  
+        4                    0.0                    1.0  
+\end{Verbatim}
+            
+    \hypertarget{analyze-the-dataset}{%
+\subsection{3. Analyze the DataSet}\label{analyze-the-dataset}}
+
+\hypertarget{check-the-shape-of-the-dataset}{%
+\subsubsection{3.1. Check the shape of the
+DataSet}\label{check-the-shape-of-the-dataset}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{n}{data}\PY{o}{.}\PY{n}{shape}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}3}]:} (6512, 27)
+\end{Verbatim}
+            
+    \hypertarget{summary-of-the-features}{%
+\subsubsection{3.2. Summary of the
+features}\label{summary-of-the-features}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{n}{data}\PY{o}{.}\PY{n}{describe}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}4}]:}        Accident\_Severity  First\_Road\_Class  Speed\_limit  Light\_Conditions  \textbackslash{}
+        count        6512.000000       6512.000000  6512.000000       6512.000000   
+        mean            0.281787          3.374693    38.846744          1.876075   
+        std             0.449905          0.736706    13.671885          1.508945   
+        min             0.000000          1.000000    20.000000          1.000000   
+        25\%             0.000000          3.000000    30.000000          1.000000   
+        50\%             0.000000          3.000000    30.000000          1.000000   
+        75\%             1.000000          4.000000    50.000000          4.000000   
+        max             1.000000          5.000000    70.000000          6.000000   
+        
+               Weather\_Conditions  Day\_of\_Week\_6  Day\_of\_Week\_5  Day\_of\_Week\_4  \textbackslash{}
+        count         6512.000000    6512.000000    6512.000000    6512.000000   
+        mean             1.440571       0.156787       0.157709       0.152181   
+        std              1.476119       0.363628       0.364496       0.359223   
+        min              1.000000       0.000000       0.000000       0.000000   
+        25\%              1.000000       0.000000       0.000000       0.000000   
+        50\%              1.000000       0.000000       0.000000       0.000000   
+        75\%              1.000000       0.000000       0.000000       0.000000   
+        max              9.000000       1.000000       1.000000       1.000000   
+        
+               Day\_of\_Week\_3  Day\_of\_Week\_2  Day\_of\_Week\_7  Road\_Type\_6  Road\_Type\_3  \textbackslash{}
+        count    6512.000000    6512.000000    6512.000000  6512.000000  6512.000000   
+        mean        0.147574       0.137592       0.135903     0.687654     0.139281   
+        std         0.354704       0.344498       0.342712     0.463486     0.346266   
+        min         0.000000       0.000000       0.000000     0.000000     0.000000   
+        25\%         0.000000       0.000000       0.000000     0.000000     0.000000   
+        50\%         0.000000       0.000000       0.000000     1.000000     0.000000   
+        75\%         0.000000       0.000000       0.000000     1.000000     0.000000   
+        max         1.000000       1.000000       1.000000     1.000000     1.000000   
+        
+               Road\_Type\_1  Road\_Type\_2  Road\_Type\_7  Junction\_Control\_4  \textbackslash{}
+        count  6512.000000  6512.000000  6512.000000         6512.000000   
+        mean      0.130221     0.020270     0.017813            0.773956   
+        std       0.336572     0.140934     0.132282            0.418300   
+        min       0.000000     0.000000     0.000000            0.000000   
+        25\%       0.000000     0.000000     0.000000            1.000000   
+        50\%       0.000000     0.000000     0.000000            1.000000   
+        75\%       0.000000     0.000000     0.000000            1.000000   
+        max       1.000000     1.000000     1.000000            1.000000   
+        
+               Junction\_Control\_2  Junction\_Control\_3  Junction\_Control\_0  \textbackslash{}
+        count         6512.000000         6512.000000         6512.000000   
+        mean             0.197021            0.009674            0.015817   
+        std              0.397779            0.097889            0.124776   
+        min              0.000000            0.000000            0.000000   
+        25\%              0.000000            0.000000            0.000000   
+        50\%              0.000000            0.000000            0.000000   
+        75\%              0.000000            0.000000            0.000000   
+        max              1.000000            1.000000            1.000000   
+        
+               Road\_Surface\_Conditions\_1  Road\_Surface\_Conditions\_2  \textbackslash{}
+        count                6512.000000                6512.000000   
+        mean                    0.741554                   0.247850   
+        std                     0.437814                   0.431797   
+        min                     0.000000                   0.000000   
+        25\%                     0.000000                   0.000000   
+        50\%                     1.000000                   0.000000   
+        75\%                     1.000000                   0.000000   
+        max                     1.000000                   1.000000   
+        
+               Road\_Surface\_Conditions\_4  Road\_Surface\_Conditions\_3  \textbackslash{}
+        count                6512.000000                6512.000000   
+        mean                    0.008753                   0.001382   
+        std                     0.093155                   0.037153   
+        min                     0.000000                   0.000000   
+        25\%                     0.000000                   0.000000   
+        50\%                     0.000000                   0.000000   
+        75\%                     0.000000                   0.000000   
+        max                     1.000000                   1.000000   
+        
+               Urban\_or\_Rural\_Area\_1  Urban\_or\_Rural\_Area\_2  
+        count            6512.000000            6512.000000  
+        mean                0.598434               0.401566  
+        std                 0.490253               0.490253  
+        min                 0.000000               0.000000  
+        25\%                 0.000000               0.000000  
+        50\%                 1.000000               0.000000  
+        75\%                 1.000000               1.000000  
+        max                 1.000000               1.000000  
+\end{Verbatim}
+            
+    \hypertarget{distribution-of-the-target-attribute}{%
+\subsubsection{3.3. Distribution of the target
+attribute}\label{distribution-of-the-target-attribute}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{n}{sns}\PY{o}{.}\PY{n}{countplot}\PY{p}{(}\PY{n}{data}\PY{o}{.}\PY{n}{Accident\PYZus{}Severity}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}5}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x2076ca38b38>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_9_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{eda}{%
+\subsection{4. EDA}\label{eda}}
+
+\hypertarget{univariate-analysis}{%
+\subsubsection{4.1. Univariate Analysis}\label{univariate-analysis}}
+
+Checking distribution of Speed\_limit attribute
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{n}{ax} \PY{o}{=} \PY{n}{sns}\PY{o}{.}\PY{n}{distplot}\PY{p}{(}\PY{n}{data}\PY{o}{.}\PY{n}{Speed\PYZus{}limit}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_11_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{bivariate-analysis}{%
+\subsubsection{4.2. Bivariate Analysis}\label{bivariate-analysis}}
+
+\hypertarget{for-numerical-numerical-attributes-vrs-accident_severity-by-boxplot}{%
+\paragraph{4.2.1. FOR NUMERICAL : Numerical Attributes Vrs
+Accident\_Severity : By
+BoxPlot}\label{for-numerical-numerical-attributes-vrs-accident_severity-by-boxplot}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{n}{sns}\PY{o}{.}\PY{n}{boxplot}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{n}{data}\PY{o}{.}\PY{n}{Accident\PYZus{}Severity}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{n}{data}\PY{o}{.}\PY{n}{Speed\PYZus{}limit}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}7}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x2076cbd5dd8>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_13_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Conclusion: \textbf{\emph{Here we can observe that if the speed limit of
+the vehicle is more than 40 then there, the accident is very likely to
+occur.}}
+
+    \hypertarget{correlation-plot-of-independent-attributes}{%
+\paragraph{4.2.2. Correlation plot of Independent
+attributes}\label{correlation-plot-of-independent-attributes}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{n}{corr} \PY{o}{=} \PY{n}{data}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Accident\PYZus{}Severity}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,}\PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}\PY{o}{.}\PY{n}{corr}\PY{p}{(}\PY{p}{)}
+        \PY{n}{sns}\PY{o}{.}\PY{n}{heatmap}\PY{p}{(}\PY{n}{corr}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}8}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x2076ccaa470>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_16_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Conclusion: \textbf{\emph{Road\_Surface\_Conditions\_2 is negatively
+correlated with Road\_Surface\_Conditions\_1 with correlation of
+97.24\%.}} \textbf{\emph{Urban\_or\_Rural\_Area\_1 is negatively
+correlated with Urban\_or\_Rural\_Area\_2 with correlation of 100.00\%}}
+
+    \textbf{\emph{So here we can remove Road\_Surface\_Conditions\_2 and
+Urban\_or\_Rural\_Area\_1 due to collinearity}}
+
+    \hypertarget{checking-for-missing-values}{%
+\subsubsection{4.3. Checking for missing
+values}\label{checking-for-missing-values}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{n}{data}\PY{o}{.}\PY{n}{isna}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}9}]:} Accident\_Index               0
+        Accident\_Severity            0
+        First\_Road\_Class             0
+        Speed\_limit                  0
+        Light\_Conditions             0
+        Weather\_Conditions           0
+        Day\_of\_Week\_6                0
+        Day\_of\_Week\_5                0
+        Day\_of\_Week\_4                0
+        Day\_of\_Week\_3                0
+        Day\_of\_Week\_2                0
+        Day\_of\_Week\_7                0
+        Road\_Type\_6                  0
+        Road\_Type\_3                  0
+        Road\_Type\_1                  0
+        Road\_Type\_2                  0
+        Road\_Type\_7                  0
+        Junction\_Control\_4           0
+        Junction\_Control\_2           0
+        Junction\_Control\_3           0
+        Junction\_Control\_0           0
+        Road\_Surface\_Conditions\_1    0
+        Road\_Surface\_Conditions\_2    0
+        Road\_Surface\_Conditions\_4    0
+        Road\_Surface\_Conditions\_3    0
+        Urban\_or\_Rural\_Area\_1        0
+        Urban\_or\_Rural\_Area\_2        0
+        dtype: int64
+\end{Verbatim}
+            
+    Conclusion: \textbf{\emph{Here we can observe that there is no missing
+values in our dataset.}}
+
+    \hypertarget{data-preparation}{%
+\subsection{5. Data Preparation}\label{data-preparation}}
+
+\hypertarget{taking-care-of-outliers-by-normalizing-the-data-by-minmax-normalization}{%
+\subsubsection{5.1. Taking care of Outliers by Normalizing the Data : By
+MinMax
+Normalization}\label{taking-care-of-outliers-by-normalizing-the-data-by-minmax-normalization}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{n}{min\PYZus{}max\PYZus{}scaler} \PY{o}{=} \PY{n}{MinMaxScaler}\PY{p}{(}\PY{p}{)}
+         \PY{n}{x\PYZus{}scaled} \PY{o}{=} \PY{n}{min\PYZus{}max\PYZus{}scaler}\PY{o}{.}\PY{n}{fit\PYZus{}transform}\PY{p}{(}\PY{n}{data}\PY{o}{.}\PY{n}{Speed\PYZus{}limit}\PY{o}{.}\PY{n}{to\PYZus{}numpy}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+         \PY{n}{x\PYZus{}scaled}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}10}]:} array([[0.2],
+                [0.2],
+                [0.4],
+                {\ldots},
+                [0.2],
+                [0.2],
+                [0.2]])
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{n}{df\PYZus{}scaled} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{x\PYZus{}scaled}\PY{p}{,}\PY{n}{columns}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Speed\PYZus{}limit}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         \PY{n}{df\PYZus{}scaled}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}11}]:}    Speed\_limit
+         0          0.2
+         1          0.2
+         2          0.4
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{n}{df\PYZus{}scaled}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{n}{bins}\PY{o}{=}\PY{l+m+mi}{15}\PY{p}{,} \PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{20}\PY{p}{,} \PY{l+m+mi}{6}\PY{p}{)}\PY{p}{,} \PY{n}{layout}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_25_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{taking-care-of-outliers-by-normalizing-the-data-by-boxcox-normalization}{%
+\subsubsection{5.2. Taking care of Outliers by Normalizing the Data : By
+BoxCox
+Normalization}\label{taking-care-of-outliers-by-normalizing-the-data-by-boxcox-normalization}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{n}{df\PYZus{}scaled\PYZus{}boxcox}\PY{o}{=}\PY{n}{boxcox1p}\PY{p}{(}\PY{n}{data}\PY{o}{.}\PY{n}{Speed\PYZus{}limit}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{n}{df\PYZus{}scaled\PYZus{}boxcox}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{n}{bins}\PY{o}{=}\PY{l+m+mi}{15}\PY{p}{,} \PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{20}\PY{p}{,} \PY{l+m+mi}{6}\PY{p}{)}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_28_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Conclusion: \textbf{\emph{As the distribution of both the method are
+almost same so we can take any of the feature scaling method to bring
+our data into a same range.}} \textbf{\emph{So, let's consider the min
+max normalization output.}}
+
+    \hypertarget{feature-importance}{%
+\subsection{6. Feature Importance}\label{feature-importance}}
+
+\hypertarget{by-rfe}{%
+\subsubsection{6.1. By RFE}\label{by-rfe}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{n}{data}\PY{o}{.}\PY{n}{Speed\PYZus{}limit} \PY{o}{=} \PY{n}{df\PYZus{}scaled}
+         \PY{n}{data}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}15}]:}   Accident\_Index  Accident\_Severity  First\_Road\_Class  Speed\_limit  \textbackslash{}
+         0  2016320136956                0.0               5.0          0.2   
+         1  2016010021162                0.0               3.0          0.2   
+         2  2016610051916                0.0               3.0          0.4   
+         3  2016100139498                0.0               4.0          0.2   
+         4  2016420087263                1.0               4.0          0.8   
+         
+            Light\_Conditions  Weather\_Conditions  Day\_of\_Week\_6  Day\_of\_Week\_5  \textbackslash{}
+         0               1.0                 1.0            0.0            0.0   
+         1               1.0                 1.0            0.0            0.0   
+         2               1.0                 2.0            0.0            0.0   
+         3               1.0                 1.0            0.0            0.0   
+         4               1.0                 1.0            0.0            0.0   
+         
+            Day\_of\_Week\_4  Day\_of\_Week\_3  Day\_of\_Week\_2  Day\_of\_Week\_7  Road\_Type\_6  \textbackslash{}
+         0            0.0            0.0            1.0            0.0          1.0   
+         1            1.0            0.0            0.0            0.0          1.0   
+         2            1.0            0.0            0.0            0.0          0.0   
+         3            1.0            0.0            0.0            0.0          1.0   
+         4            0.0            1.0            0.0            0.0          1.0   
+         
+            Road\_Type\_3  Road\_Type\_1  Road\_Type\_2  Road\_Type\_7  Junction\_Control\_4  \textbackslash{}
+         0          0.0          0.0          0.0          0.0                 1.0   
+         1          0.0          0.0          0.0          0.0                 0.0   
+         2          0.0          1.0          0.0          0.0                 1.0   
+         3          0.0          0.0          0.0          0.0                 1.0   
+         4          0.0          0.0          0.0          0.0                 1.0   
+         
+            Junction\_Control\_2  Junction\_Control\_3  Junction\_Control\_0  \textbackslash{}
+         0                 0.0                 0.0                 0.0   
+         1                 1.0                 0.0                 0.0   
+         2                 0.0                 0.0                 0.0   
+         3                 0.0                 0.0                 0.0   
+         4                 0.0                 0.0                 0.0   
+         
+            Road\_Surface\_Conditions\_1  Road\_Surface\_Conditions\_2  \textbackslash{}
+         0                        1.0                        0.0   
+         1                        1.0                        0.0   
+         2                        0.0                        1.0   
+         3                        1.0                        0.0   
+         4                        1.0                        0.0   
+         
+            Road\_Surface\_Conditions\_4  Road\_Surface\_Conditions\_3  \textbackslash{}
+         0                        0.0                        0.0   
+         1                        0.0                        0.0   
+         2                        0.0                        0.0   
+         3                        0.0                        0.0   
+         4                        0.0                        0.0   
+         
+            Urban\_or\_Rural\_Area\_1  Urban\_or\_Rural\_Area\_2  
+         0                    1.0                    0.0  
+         1                    1.0                    0.0  
+         2                    0.0                    1.0  
+         3                    1.0                    0.0  
+         4                    0.0                    1.0  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{n}{X} \PY{o}{=} \PY{n}{data}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Accident\PYZus{}Index}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Accident\PYZus{}Severity}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}\PY{n}{axis} \PY{o}{=} \PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{y} \PY{o}{=} \PY{n}{data}\PY{o}{.}\PY{n}{Accident\PYZus{}Severity}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{n}{lr} \PY{o}{=} \PY{n}{LogisticRegression}\PY{p}{(}\PY{p}{)}
+         \PY{n}{lr}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X}\PY{p}{,}\PY{n}{y}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}stop the search when only the last feature is left}
+         \PY{n}{rfe} \PY{o}{=} \PY{n}{RFE}\PY{p}{(}\PY{n}{lr}\PY{p}{,} \PY{n}{n\PYZus{}features\PYZus{}to\PYZus{}select}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{verbose} \PY{o}{=} \PY{l+m+mi}{3} \PY{p}{)}
+         \PY{n}{fit}\PY{o}{=}\PY{n}{rfe}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X}\PY{p}{,}\PY{n}{y}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Num Features: }\PY{l+s+si}{\PYZpc{}d}\PY{l+s+s2}{\PYZdq{}}\PY{o}{\PYZpc{}} \PY{n}{fit}\PY{o}{.}\PY{n}{n\PYZus{}features\PYZus{}}\PY{p}{)} 
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Feature Ranking: }\PY{l+s+si}{\PYZpc{}s}\PY{l+s+s2}{\PYZdq{}}\PY{o}{\PYZpc{}} \PY{n}{fit}\PY{o}{.}\PY{n}{ranking\PYZus{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Fitting estimator with 25 features.
+Fitting estimator with 24 features.
+Fitting estimator with 23 features.
+Fitting estimator with 22 features.
+Fitting estimator with 21 features.
+Fitting estimator with 20 features.
+Fitting estimator with 19 features.
+Fitting estimator with 18 features.
+Fitting estimator with 17 features.
+Fitting estimator with 16 features.
+Fitting estimator with 15 features.
+Fitting estimator with 14 features.
+Fitting estimator with 13 features.
+Fitting estimator with 12 features.
+Fitting estimator with 11 features.
+Fitting estimator with 10 features.
+Fitting estimator with 9 features.
+Fitting estimator with 8 features.
+Fitting estimator with 7 features.
+Fitting estimator with 6 features.
+Fitting estimator with 5 features.
+Fitting estimator with 4 features.
+Fitting estimator with 3 features.
+Fitting estimator with 2 features.
+Num Features: 1
+Feature Ranking: [13 11 19 23 24 20 12 16 17 14  2  6  5  8  7 10  9 15  4 21 18 22 25  3
+  1]
+
+    \end{Verbatim}
+
+    \hypertarget{our-feature-ranking-based-on-our-feature-score}{%
+\paragraph{Our feature ranking based on our feature
+score}\label{our-feature-ranking-based-on-our-feature-score}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{n+nb}{dict}\PY{p}{(}\PY{n+nb}{sorted}\PY{p}{(}\PY{n+nb}{dict}\PY{p}{(}\PY{n+nb}{zip}\PY{p}{(}\PY{n}{X}\PY{o}{.}\PY{n}{columns}\PY{p}{,}\PY{n}{fit}\PY{o}{.}\PY{n}{ranking\PYZus{}}\PY{p}{)}\PY{p}{)}\PY{o}{.}\PY{n}{items}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{key} \PY{o}{=} \PY{k}{lambda} \PY{n}{x}\PY{p}{:}\PY{n}{x}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}18}]:} \{'Urban\_or\_Rural\_Area\_2': 1,
+          'Road\_Type\_6': 2,
+          'Urban\_or\_Rural\_Area\_1': 3,
+          'Junction\_Control\_0': 4,
+          'Road\_Type\_1': 5,
+          'Road\_Type\_3': 6,
+          'Road\_Type\_7': 7,
+          'Road\_Type\_2': 8,
+          'Junction\_Control\_2': 9,
+          'Junction\_Control\_4': 10,
+          'Speed\_limit': 11,
+          'Day\_of\_Week\_4': 12,
+          'First\_Road\_Class': 13,
+          'Day\_of\_Week\_7': 14,
+          'Junction\_Control\_3': 15,
+          'Day\_of\_Week\_3': 16,
+          'Day\_of\_Week\_2': 17,
+          'Road\_Surface\_Conditions\_2': 18,
+          'Light\_Conditions': 19,
+          'Day\_of\_Week\_5': 20,
+          'Road\_Surface\_Conditions\_1': 21,
+          'Road\_Surface\_Conditions\_4': 22,
+          'Weather\_Conditions': 23,
+          'Day\_of\_Week\_6': 24,
+          'Road\_Surface\_Conditions\_3': 25\}
+\end{Verbatim}
+            
+    \textbf{\emph{The top 15 features based on RFE are :}}
+
+Urban\_or\_Rural\_Area\_2
+
+Road\_Type\_6
+
+Urban\_or\_Rural\_Area\_1
+
+Junction\_Control\_0
+
+Road\_Type\_1
+
+Road\_Type\_3
+
+Road\_Type\_7
+
+Road\_Type\_2
+
+Junction\_Control\_2
+
+Junction\_Control\_4
+
+Speed\_limit
+
+Day\_of\_Week\_4
+
+First\_Road\_Class
+
+Day\_of\_Week\_7
+
+Junction\_Control\_3
+
+    \hypertarget{task-1-use-tree-based-functions-to-analyze-the-severity-of-traffic-accidents-and-identify-key-variables.}{%
+\subsubsection{Task 1: Use Tree-based functions to analyze the severity
+of traffic accidents and identify key
+variables.}\label{task-1-use-tree-based-functions-to-analyze-the-severity-of-traffic-accidents-and-identify-key-variables.}}
+
+\hypertarget{by-decisiontree}{%
+\subsubsection{6.2. By DecisionTree}\label{by-decisiontree}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}19}]:} \PY{n}{dtree} \PY{o}{=} \PY{n}{DecisionTreeClassifier}\PY{p}{(}\PY{p}{)}
+         \PY{n}{dtree}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X}\PY{p}{,}\PY{n}{y}\PY{p}{)}
+         \PY{n+nb}{dict}\PY{p}{(}\PY{n+nb}{sorted}\PY{p}{(}\PY{n+nb}{dict}\PY{p}{(}\PY{n+nb}{zip}\PY{p}{(}\PY{n}{X}\PY{o}{.}\PY{n}{columns}\PY{p}{,}\PY{n}{dtree}\PY{o}{.}\PY{n}{feature\PYZus{}importances\PYZus{}}\PY{p}{)}\PY{p}{)}\PY{o}{.}\PY{n}{items}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{key} \PY{o}{=} \PY{k}{lambda} \PY{n}{x}\PY{p}{:}\PY{n}{x}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}\PY{n}{reverse}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}19}]:} \{'Urban\_or\_Rural\_Area\_1': 0.5730372129495093,
+          'Road\_Type\_6': 0.4104078537021405,
+          'Speed\_limit': 0.0038264515801118776,
+          'Road\_Type\_2': 0.0036296671812579783,
+          'Junction\_Control\_0': 0.0031416645918026817,
+          'Day\_of\_Week\_4': 0.001751010925130435,
+          'Road\_Surface\_Conditions\_2': 0.0016602177660495975,
+          'Light\_Conditions': 0.0011358711173440963,
+          'Road\_Type\_1': 0.0007587714008898552,
+          'Road\_Type\_3': 0.0003983549854671745,
+          'Day\_of\_Week\_5': 0.0002529238002966183,
+          'First\_Road\_Class': 0.0,
+          'Weather\_Conditions': 0.0,
+          'Day\_of\_Week\_6': 0.0,
+          'Day\_of\_Week\_3': 0.0,
+          'Day\_of\_Week\_2': 0.0,
+          'Day\_of\_Week\_7': 0.0,
+          'Road\_Type\_7': 0.0,
+          'Junction\_Control\_4': 0.0,
+          'Junction\_Control\_2': 0.0,
+          'Junction\_Control\_3': 0.0,
+          'Road\_Surface\_Conditions\_1': 0.0,
+          'Road\_Surface\_Conditions\_4': 0.0,
+          'Road\_Surface\_Conditions\_3': 0.0,
+          'Urban\_or\_Rural\_Area\_2': 0.0\}
+\end{Verbatim}
+            
+    \textbf{\emph{Top 15 features based on Decision Tree are:}}
+
+Urban\_or\_Rural\_Area\_1
+
+Road\_Type\_6
+
+Road\_Type\_2
+
+Speed\_limit
+
+Junction\_Control\_0
+
+Light\_Conditions
+
+Day\_of\_Week\_4
+
+Road\_Surface\_Conditions\_1
+
+Road\_Type\_1
+
+Road\_Type\_3
+
+Day\_of\_Week\_5
+
+Junction\_Control\_2
+
+Urban\_or\_Rural\_Area\_2
+
+First\_Road\_Class
+
+Road\_Type\_7
+
+    \hypertarget{by-random-forest-classifier}{%
+\subsubsection{6.3. By Random Forest
+Classifier}\label{by-random-forest-classifier}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}20}]:} \PY{c+c1}{\PYZsh{} Create a random forest classifier}
+         \PY{n}{clf} \PY{o}{=} \PY{n}{RandomForestClassifier}\PY{p}{(}\PY{n}{n\PYZus{}estimators}\PY{o}{=}\PY{l+m+mi}{10000}\PY{p}{,} \PY{n}{random\PYZus{}state}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{n\PYZus{}jobs}\PY{o}{=}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Train the classifier}
+         \PY{n}{clf}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{)}
+         \PY{n}{feature\PYZus{}weightage\PYZus{}dict} \PY{o}{=} \PY{n+nb}{dict}\PY{p}{(}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} Print the name and gini importance of each feature}
+         \PY{k}{for} \PY{n}{feature} \PY{o+ow}{in} \PY{n+nb}{zip}\PY{p}{(}\PY{n}{X}\PY{o}{.}\PY{n}{columns}\PY{p}{,} \PY{n}{clf}\PY{o}{.}\PY{n}{feature\PYZus{}importances\PYZus{}}\PY{p}{)}\PY{p}{:}
+             \PY{n}{feature\PYZus{}weightage\PYZus{}dict}\PY{o}{.}\PY{n}{update}\PY{p}{(}\PY{p}{\PYZob{}}\PY{n}{feature}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{:}\PY{n}{feature}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{\PYZcb{}}\PY{p}{)}
+         
+         \PY{n}{sorted\PYZus{}feature\PYZus{}weightage\PYZus{}dict} \PY{o}{=} \PY{n+nb}{sorted}\PY{p}{(}\PY{n}{feature\PYZus{}weightage\PYZus{}dict}\PY{o}{.}\PY{n}{items}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{key}\PY{o}{=}\PY{k}{lambda} \PY{n}{kv}\PY{p}{:} \PY{n}{kv}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{reverse} \PY{o}{=} \PY{k+kc}{True}\PY{p}{)}
+         \PY{n+nb}{dict}\PY{p}{(}\PY{n}{sorted\PYZus{}feature\PYZus{}weightage\PYZus{}dict}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}20}]:} \{'Urban\_or\_Rural\_Area\_1': 0.2751371254167683,
+          'Urban\_or\_Rural\_Area\_2': 0.2675687763671991,
+          'Road\_Type\_6': 0.1897328090676221,
+          'Speed\_limit': 0.09895741188131127,
+          'Road\_Type\_1': 0.06361990738981291,
+          'Road\_Type\_3': 0.04781133445251827,
+          'Junction\_Control\_2': 0.012674947899221942,
+          'Light\_Conditions': 0.011862955122763747,
+          'First\_Road\_Class': 0.008941175413301354,
+          'Road\_Type\_7': 0.007718264914086424,
+          'Junction\_Control\_0': 0.0046824762574312105,
+          'Junction\_Control\_4': 0.0037674900875684994,
+          'Road\_Type\_2': 0.0025979637782136333,
+          'Weather\_Conditions': 0.0009198168156307867,
+          'Day\_of\_Week\_4': 0.0008658269777036871,
+          'Road\_Surface\_Conditions\_2': 0.0005522861134032807,
+          'Road\_Surface\_Conditions\_1': 0.0005515909656629505,
+          'Day\_of\_Week\_5': 0.0004890291021736808,
+          'Day\_of\_Week\_6': 0.0004037883026527261,
+          'Day\_of\_Week\_3': 0.0003562705883126495,
+          'Day\_of\_Week\_7': 0.00025661867521688264,
+          'Day\_of\_Week\_2': 0.00024576625934130566,
+          'Junction\_Control\_3': 0.00014798591212554596,
+          'Road\_Surface\_Conditions\_4': 0.0001210059331176474,
+          'Road\_Surface\_Conditions\_3': 1.737630683997997e-05\}
+\end{Verbatim}
+            
+    \textbf{\emph{Top 15 features based on RandomForest are:}}
+
+Urban\_or\_Rural\_Area\_1
+
+Urban\_or\_Rural\_Area\_2
+
+Road\_Type\_6
+
+Speed\_limit
+
+Road\_Type\_1
+
+Road\_Type\_3
+
+Junction\_Control\_2
+
+Light\_Conditions
+
+First\_Road\_Class
+
+Road\_Type\_7
+
+Junction\_Control\_0
+
+Junction\_Control\_4
+
+Road\_Type\_2
+
+Weather\_Conditions
+
+Day\_of\_Week\_4
+
+    Conclusion: \textbf{\emph{From the above 3 feature importance methods we
+can clearly observe that features like Urban\_or\_Rural\_Area\_1,
+Urban\_or\_Rural\_Area\_2, Road\_Type\_6, Speed\_limit, Road\_Type\_1,
+Road\_Type\_3, Junction\_Control\_2, First\_Road\_Class, Road\_Type\_7,
+Junction\_Control\_0,
+Junction\_Control\_4,Road\_Type\_2,Day\_of\_Week\_4 has the higher
+feature importance in determining the accident severity.}}
+
+    \hypertarget{task-2-use-split-data-to-separate-training-and-validation-data}{%
+\subsubsection{Task 2: Use Split Data to separate training and
+validation
+data}\label{task-2-use-split-data-to-separate-training-and-validation-data}}
+
+    \hypertarget{train-validation-split}{%
+\subsection{7. Train-Validation Split}\label{train-validation-split}}
+
+\hypertarget{splitting-data-into-train-and-validation-set}{%
+\subsubsection{7.1. Splitting data into train and validation
+set}\label{splitting-data-into-train-and-validation-set}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{X\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}test} \PY{o}{=} \PY{n}{train\PYZus{}test\PYZus{}split}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{test\PYZus{}size}\PY{o}{=}\PY{l+m+mf}{0.15}\PY{p}{,} \PY{n}{random\PYZus{}state}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+\end{Verbatim}
+
+
+    \textbf{\emph{As our dataset is biased towards 0 class label so we will
+do upsampling using SMOTE so that our trained model will not be biased
+towards our 0 class label.}} \#\#\# 7.2. Over-Sampling Using SMOTE
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}22}]:} \PY{n}{sm} \PY{o}{=} \PY{n}{SMOTE}\PY{p}{(}\PY{n}{random\PYZus{}state}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{,}\PY{n}{k\PYZus{}neighbors}\PY{o}{=}\PY{l+m+mi}{5}\PY{p}{)}
+         \PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train} \PY{o}{=}\PY{n}{sm}\PY{o}{.}\PY{n}{fit\PYZus{}sample}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,}\PY{n}{y\PYZus{}train}\PY{p}{)}
+\end{Verbatim}
+
+
+    \hypertarget{train-validation-split-after-smote}{%
+\subsubsection{7.3. Train-Validation Split after
+SMOTE}\label{train-validation-split-after-smote}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}23}]:} \PY{n}{X\PYZus{}train\PYZus{}new}\PY{p}{,} \PY{n}{X\PYZus{}test\PYZus{}new}\PY{p}{,} \PY{n}{y\PYZus{}train\PYZus{}new}\PY{p}{,} \PY{n}{y\PYZus{}test\PYZus{}new} \PY{o}{=} \PY{n}{train\PYZus{}test\PYZus{}split}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{,} \PY{n}{test\PYZus{}size}\PY{o}{=}\PY{l+m+mf}{0.30}\PY{p}{,} \PY{n}{random\PYZus{}state}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+\end{Verbatim}
+
+
+    \hypertarget{model-builiding-and-prediction}{%
+\subsection{8. Model Builiding And
+Prediction}\label{model-builiding-and-prediction}}
+
+    \textbf{\emph{Using different classification models :}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}24}]:} \PY{n}{names} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Logistic Regression}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                  \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Nearest Neighbors}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+                  \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Decision Tree}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Random Forest}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+                  \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Naive Bayes}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+         
+         \PY{n}{classifiers} \PY{o}{=} \PY{p}{[}\PY{n}{LogisticRegression}\PY{p}{(}\PY{p}{)}\PY{p}{,}
+             \PY{n}{KNeighborsClassifier}\PY{p}{(}\PY{p}{)}\PY{p}{,}
+             \PY{n}{DecisionTreeClassifier}\PY{p}{(}\PY{p}{)}\PY{p}{,}
+             \PY{n}{RandomForestClassifier}\PY{p}{(}\PY{p}{)}\PY{p}{,}
+             \PY{n}{MultinomialNB}\PY{p}{(}\PY{p}{)}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}25}]:} \PY{n}{model\PYZus{}dict} \PY{o}{=} \PY{p}{\PYZob{}}\PY{p}{\PYZcb{}}    
+         \PY{k}{for} \PY{n}{name}\PY{p}{,} \PY{n}{clf} \PY{o+ow}{in} \PY{n+nb}{zip}\PY{p}{(}\PY{n}{names}\PY{p}{,} \PY{n}{classifiers}\PY{p}{)}\PY{p}{:}
+             
+             \PY{c+c1}{\PYZsh{} traing}
+             \PY{n}{clf}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train\PYZus{}new}\PY{p}{,} \PY{n}{y\PYZus{}train\PYZus{}new}\PY{p}{)}
+             \PY{c+c1}{\PYZsh{} predict}
+             \PY{n}{y\PYZus{}pred} \PY{o}{=} \PY{n}{clf}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X\PYZus{}test\PYZus{}new}\PY{p}{)}
+             \PY{c+c1}{\PYZsh{} accuracy}
+             \PY{n}{acc\PYZus{}score} \PY{o}{=} \PY{n}{accuracy\PYZus{}score}\PY{p}{(}\PY{n}{y\PYZus{}test\PYZus{}new}\PY{p}{,}\PY{n}{y\PYZus{}pred}\PY{p}{)}
+         
+             \PY{n}{model\PYZus{}dict}\PY{p}{[}\PY{n}{name}\PY{p}{]} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{accuracy score}\PY{l+s+s2}{\PYZdq{}} \PY{p}{:} \PY{n}{acc\PYZus{}score}\PY{p}{\PYZcb{}}
+         \PY{n}{model\PYZus{}dict}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}25}]:} \{'Logistic Regression': \{'accuracy score': 0.997071129707113\},
+          'Nearest Neighbors': \{'accuracy score': 0.9899581589958159\},
+          'Decision Tree': \{'accuracy score': 0.999581589958159\},
+          'Random Forest': \{'accuracy score': 0.998744769874477\},
+          'Naive Bayes': \{'accuracy score': 0.992050209205021\}\}
+\end{Verbatim}
+            
+    \textbf{\emph{Here we can observe that without any hyperparameter tuning
+our decision tree gave the accuracy as 99.96\%.}} \textbf{\emph{Now we
+will check wheather our model is overfit or not by checking the trained
+model with unseen data that is our X\_test(Before SMOTE we have split
+our dataset into X\_train and X\_test).}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}26}]:} \PY{n}{clf} \PY{o}{=} \PY{n}{DecisionTreeClassifier}\PY{p}{(}\PY{p}{)}
+         \PY{n}{clf}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train\PYZus{}new}\PY{p}{,} \PY{n}{y\PYZus{}train\PYZus{}new}\PY{p}{)}
+         \PY{n}{y\PYZus{}pred} \PY{o}{=} \PY{n}{clf}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ Accuracy is }\PY{l+s+si}{\PYZob{}:.2f\PYZcb{}}\PY{l+s+s2}{\PYZpc{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{accuracy\PYZus{}score}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}pred}\PY{p}{)}\PY{o}{*}\PY{l+m+mi}{100}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+ Accuracy is 99.59\%
+
+    \end{Verbatim}
+
+    \textbf{\emph{Here we can observe that in the unseen data our model has
+predicted the accident severity with 99.59\%. So we can conclude that
+our model is not overfit and in future also it will give accuracy upto
+this level in unseen data.}}
+
+    \hypertarget{task-3-run-repetitive-statements-to-find-an-optimal-depth-of-decision-tree-and-evaluate-multiclass-classification-to-compare-performance-by-depth-and-find-an-optimal-depth}{%
+\subsubsection{Task 3: Run repetitive statements to find an optimal
+depth of Decision Tree and Evaluate Multiclass Classification to compare
+performance by depth and find an optimal
+depth}\label{task-3-run-repetitive-statements-to-find-an-optimal-depth-of-decision-tree-and-evaluate-multiclass-classification-to-compare-performance-by-depth-and-find-an-optimal-depth}}
+
+\hypertarget{hyper-parameter-tuning-of-the-best-model-decision-tree}{%
+\subsubsection{Hyper-parameter tuning of the best model (Decision
+Tree)}\label{hyper-parameter-tuning-of-the-best-model-decision-tree}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}27}]:} \PY{n}{model\PYZus{}dt} \PY{o}{=} \PY{n}{DecisionTreeClassifier}\PY{p}{(}\PY{p}{)}
+         \PY{n}{max\PYZus{}depth} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mi}{50}\PY{p}{,} \PY{l+m+mi}{100}\PY{p}{,} \PY{l+m+mi}{500}\PY{p}{,} \PY{l+m+mi}{1000}\PY{p}{]}
+         \PY{n}{min\PYZus{}samples\PYZus{}split} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mi}{100}\PY{p}{,} \PY{l+m+mi}{500}\PY{p}{]}
+         \PY{n}{params\PYZus{}dt} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{max\PYZus{}depth}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{n}{max\PYZus{}depth}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{min\PYZus{}samples\PYZus{}split}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{n}{min\PYZus{}samples\PYZus{}split}\PY{p}{\PYZcb{}}
+         \PY{n}{ml\PYZus{}dt} \PY{o}{=} \PY{n}{RandomizedSearchCV}\PY{p}{(}\PY{n}{estimator}\PY{o}{=}\PY{n}{model\PYZus{}dt}\PY{p}{,} \PY{n}{param\PYZus{}distributions}\PY{o}{=}\PY{n}{params\PYZus{}dt}\PY{p}{,}\PY{n}{scoring}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{accuracy}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{return\PYZus{}train\PYZus{}score}\PY{o}{=} \PY{k+kc}{True}\PY{p}{,}\PY{n}{n\PYZus{}jobs}\PY{o}{=}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{bestValue} \PY{o}{=} \PY{n}{ml\PYZus{}dt}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,}\PY{n}{y\PYZus{}train}\PY{p}{)}
+\end{Verbatim}
+
+
+    \hypertarget{best-hyper-parameter}{%
+\subsubsection{Best Hyper parameter}\label{best-hyper-parameter}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}28}]:} \PY{n}{bestValue}\PY{o}{.}\PY{n}{best\PYZus{}params\PYZus{}}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}28}]:} \{'min\_samples\_split': 2, 'max\_depth': 5\}
+\end{Verbatim}
+            
+    \hypertarget{testing-the-performance-of-the-model-on-test-data}{%
+\subsubsection{Testing the performance of the model on test
+data}\label{testing-the-performance-of-the-model-on-test-data}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}29}]:} \PY{c+c1}{\PYZsh{} here we are choosing the best hyper \PYZhy{} parameter}
+         
+         \PY{n}{min\PYZus{}samples\PYZus{}split} \PY{o}{=} \PY{l+m+mi}{2}
+         \PY{n}{max\PYZus{}depth} \PY{o}{=} \PY{l+m+mi}{5}
+         
+         \PY{n}{dtc} \PY{o}{=} \PY{n}{DecisionTreeClassifier}\PY{p}{(}\PY{n}{min\PYZus{}samples\PYZus{}split}\PY{o}{=}\PY{n}{min\PYZus{}samples\PYZus{}split}\PY{p}{,}\PY{n}{max\PYZus{}depth}\PY{o}{=}\PY{n}{max\PYZus{}depth}\PY{p}{)}
+         \PY{n}{dtc}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{)}
+         
+         \PY{n}{y\PYZus{}pred} \PY{o}{=} \PY{n}{dtc}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{)}
+\end{Verbatim}
+
+
+    \hypertarget{accuracy}{%
+\subsubsection{Accuracy}\label{accuracy}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}30}]:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ Accuracy is }\PY{l+s+si}{\PYZob{}:.2f\PYZcb{}}\PY{l+s+s2}{\PYZpc{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{accuracy\PYZus{}score}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}pred}\PY{p}{)}\PY{o}{*}\PY{l+m+mi}{100}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+ Accuracy is 99.59\%
+
+    \end{Verbatim}
+
+    \textbf{\emph{Here we can clearly observe that our accuracy is almost
+same.}}
+
+    \hypertarget{task-4-use-decision-tree-for-depth-optimization-and-random-forest-default-function-to-train-a-learning-model-for-traffic-accident-data-and-evaluate-the-model-performance-using-test-data.}{%
+\subsubsection{Task 4: Use Decision Tree (for depth optimization) and
+Random Forest (default) function to train a learning model for traffic
+accident data and evaluate the model performance using test
+data.}\label{task-4-use-decision-tree-for-depth-optimization-and-random-forest-default-function-to-train-a-learning-model-for-traffic-accident-data-and-evaluate-the-model-performance-using-test-data.}}
+
+and
+
+\hypertarget{task-5-use-binary-classification-to-validate-the-accuracy-of-respective-models.}{%
+\subsubsection{Task 5: Use Binary Classification to validate the
+accuracy of respective
+models.}\label{task-5-use-binary-classification-to-validate-the-accuracy-of-respective-models.}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}31}]:} \PY{n}{model\PYZus{}names} \PY{o}{=} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Decision Tree}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Random Forest}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+         
+         \PY{n}{classifiers\PYZus{}object} \PY{o}{=} \PY{p}{[}\PY{n}{DecisionTreeClassifier}\PY{p}{(}\PY{n}{min\PYZus{}samples\PYZus{}split} \PY{o}{=} \PY{l+m+mi}{5}\PY{p}{,}\PY{n}{max\PYZus{}depth} \PY{o}{=} \PY{l+m+mi}{100}\PY{p}{)}\PY{p}{,}\PY{n}{RandomForestClassifier}\PY{p}{(}\PY{p}{)}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}33}]:} \PY{n}{classifier\PYZus{}model\PYZus{}dict} \PY{o}{=} \PY{p}{\PYZob{}}\PY{p}{\PYZcb{}}    
+         \PY{k}{for} \PY{n}{name}\PY{p}{,} \PY{n}{clf} \PY{o+ow}{in} \PY{n+nb}{zip}\PY{p}{(}\PY{n}{model\PYZus{}names}\PY{p}{,} \PY{n}{classifiers\PYZus{}object}\PY{p}{)}\PY{p}{:}
+             
+             \PY{c+c1}{\PYZsh{} traing}
+             \PY{n}{clf}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{)}
+             \PY{c+c1}{\PYZsh{} predict}
+             \PY{n}{y\PYZus{}pred} \PY{o}{=} \PY{n}{clf}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{)}
+             \PY{c+c1}{\PYZsh{} accuracy}
+             \PY{n}{acc\PYZus{}score} \PY{o}{=} \PY{n}{accuracy\PYZus{}score}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{p}{,}\PY{n}{y\PYZus{}pred}\PY{p}{)}
+         
+             \PY{n}{classifier\PYZus{}model\PYZus{}dict}\PY{p}{[}\PY{n}{name}\PY{p}{]} \PY{o}{=} \PY{p}{[}\PY{n}{acc\PYZus{}score}\PY{p}{]}
+             
+         \PY{n}{model\PYZus{}df\PYZus{}variable} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{classifier\PYZus{}model\PYZus{}dict}\PY{p}{,} \PY{n}{index} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Accuracy}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{T}
+         \PY{n}{model\PYZus{}df\PYZus{}variable} \PY{o}{=} \PY{n}{model\PYZus{}df\PYZus{}variable}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{n}{by}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Accuracy}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{ascending}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+         \PY{n}{model\PYZus{}df\PYZus{}variable}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}33}]:}                Accuracy
+         Decision Tree  0.995906
+         Random Forest  0.991812
+\end{Verbatim}
+            
+    \textbf{\emph{Here we can observe that Decision Tree is performing
+better than RandomForest.}}
+
+    \hypertarget{task-6-use-filter-to-retain-only-key-variables-at-each-trees-top-node-of-random-forest-and-sort-and-check-key-variables-by-assigning-weight-to-the-key-variables}{%
+\subsubsection{Task 6 : Use filter to retain only key variables at each
+tree's top node of Random Forest and sort and check key variables by
+assigning weight to the key
+variables}\label{task-6-use-filter-to-retain-only-key-variables-at-each-trees-top-node-of-random-forest-and-sort-and-check-key-variables-by-assigning-weight-to-the-key-variables}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}34}]:} \PY{n}{rf\PYZus{}model} \PY{o}{=} \PY{n}{RandomForestClassifier}\PY{p}{(}\PY{p}{)}
+         \PY{n}{rf\PYZus{}model}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{)}
+         \PY{n}{estimators} \PY{o}{=} \PY{n}{rf\PYZus{}model}\PY{o}{.}\PY{n}{estimators\PYZus{}}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}35}]:} \PY{n}{rows} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{k}{for} \PY{n}{index}\PY{p}{,}\PY{n}{clf} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{estimators}\PY{p}{)}\PY{p}{:}
+             \PY{n}{key\PYZus{}features} \PY{o}{=} \PY{n+nb}{dict}\PY{p}{(}\PY{n+nb}{sorted}\PY{p}{(}\PY{n+nb}{dict}\PY{p}{(}\PY{n+nb}{zip}\PY{p}{(}\PY{n}{X}\PY{o}{.}\PY{n}{columns}\PY{p}{,}\PY{n}{clf}\PY{o}{.}\PY{n}{feature\PYZus{}importances\PYZus{}} \PY{p}{)}\PY{p}{)}\PY{o}{.}\PY{n}{items}\PY{p}{(}\PY{p}{)}\PY{p}{,}\PY{n}{key} \PY{o}{=} \PY{k}{lambda} \PY{n}{x}\PY{p}{:}\PY{n}{x}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}\PY{n}{reverse}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}\PY{p}{)}
+             \PY{n}{key\PYZus{}features} \PY{o}{=} \PY{p}{\PYZob{}}\PY{n}{k}\PY{p}{:} \PY{n}{v} \PY{k}{for} \PY{p}{(}\PY{n}{k}\PY{p}{,} \PY{n}{v}\PY{p}{)} \PY{o+ow}{in} \PY{n}{key\PYZus{}features}\PY{o}{.}\PY{n}{items}\PY{p}{(}\PY{p}{)} \PY{k}{if} \PY{n}{v} \PY{o}{\PYZgt{}} \PY{l+m+mi}{0}\PY{p}{\PYZcb{}}
+             \PY{n}{rows}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{DecisionTreeClassifier\PYZus{}}\PY{l+s+si}{\PYZob{}0\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n+nb}{int}\PY{p}{(}\PY{n}{index}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}\PY{p}{,}\PY{n}{key\PYZus{}features}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{,}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{key\PYZus{}features}\PY{o}{.}\PY{n}{keys}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{,}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n+nb}{map}\PY{p}{(}\PY{n+nb}{str}\PY{p}{,}\PY{n}{key\PYZus{}features}\PY{o}{.}\PY{n}{values}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+             
+         \PY{n}{display\PYZus{}tree\PYZus{}features} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{rows}\PY{p}{,}\PY{n}{columns}\PY{o}{=}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Decision Tree Estimator}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Key Features}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Features}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Weights}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,}\PY{n}{index}\PY{o}{=}\PY{n+nb}{list}\PY{p}{(}\PY{n+nb}{list}\PY{p}{(}\PY{n+nb}{zip}\PY{p}{(}\PY{o}{*}\PY{n}{rows}\PY{p}{)}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Decision Tree Estimator}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,}\PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{display\PYZus{}tree\PYZus{}features}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}35}]:}                                                                  Key Features  \textbackslash{}
+         DecisionTreeClassifier\_1    \{'Urban\_or\_Rural\_Area\_1': 0.33401422472434794,{\ldots}   
+         DecisionTreeClassifier\_2    \{'Urban\_or\_Rural\_Area\_2': 0.7252390616277096, {\ldots}   
+         DecisionTreeClassifier\_3    \{'Urban\_or\_Rural\_Area\_1': 0.2972421521202719, {\ldots}   
+         DecisionTreeClassifier\_4    \{'Urban\_or\_Rural\_Area\_1': 0.7175233614212883, {\ldots}   
+         DecisionTreeClassifier\_5    \{'Urban\_or\_Rural\_Area\_2': 0.6191037811355886, {\ldots}   
+         DecisionTreeClassifier\_6    \{'Road\_Type\_6': 0.3424703219683284, 'Urban\_or\_{\ldots}   
+         DecisionTreeClassifier\_7    \{'Urban\_or\_Rural\_Area\_1': 0.3010601704831565, {\ldots}   
+         DecisionTreeClassifier\_8    \{'Urban\_or\_Rural\_Area\_2': 0.6922504032444525, {\ldots}   
+         DecisionTreeClassifier\_9    \{'Speed\_limit': 0.32505298265858784, 'Urban\_or{\ldots}   
+         DecisionTreeClassifier\_10   \{'Urban\_or\_Rural\_Area\_1': 0.7408303457076333, {\ldots}   
+         DecisionTreeClassifier\_11   \{'Urban\_or\_Rural\_Area\_1': 0.3523744778981918, {\ldots}   
+         DecisionTreeClassifier\_12   \{'Urban\_or\_Rural\_Area\_1': 0.6083941207354211, {\ldots}   
+         DecisionTreeClassifier\_13   \{'Urban\_or\_Rural\_Area\_1': 0.6015767635063494, {\ldots}   
+         DecisionTreeClassifier\_14   \{'Urban\_or\_Rural\_Area\_1': 0.5901756899860242, {\ldots}   
+         DecisionTreeClassifier\_15   \{'Urban\_or\_Rural\_Area\_1': 0.6274896891837177, {\ldots}   
+         DecisionTreeClassifier\_16   \{'Urban\_or\_Rural\_Area\_2': 0.699373629284075, '{\ldots}   
+         DecisionTreeClassifier\_17   \{'Urban\_or\_Rural\_Area\_2': 0.7184025671826624, {\ldots}   
+         DecisionTreeClassifier\_18   \{'Speed\_limit': 0.3555348059160004, 'Urban\_or\_{\ldots}   
+         DecisionTreeClassifier\_19   \{'Urban\_or\_Rural\_Area\_1': 0.7038270757957759, {\ldots}   
+         DecisionTreeClassifier\_20   \{'Urban\_or\_Rural\_Area\_1': 0.5733779126102362, {\ldots}   
+         DecisionTreeClassifier\_21   \{'Urban\_or\_Rural\_Area\_2': 0.6958253693823018, {\ldots}   
+         DecisionTreeClassifier\_22   \{'Urban\_or\_Rural\_Area\_2': 0.7065397608858108, {\ldots}   
+         DecisionTreeClassifier\_23   \{'Urban\_or\_Rural\_Area\_2': 0.7223721974941886, {\ldots}   
+         DecisionTreeClassifier\_24   \{'Urban\_or\_Rural\_Area\_1': 0.7022099570820137, {\ldots}   
+         DecisionTreeClassifier\_25   \{'Urban\_or\_Rural\_Area\_2': 0.7173843520366301, {\ldots}   
+         DecisionTreeClassifier\_26   \{'Urban\_or\_Rural\_Area\_2': 0.6376165631954175, {\ldots}   
+         DecisionTreeClassifier\_27   \{'Urban\_or\_Rural\_Area\_2': 0.7330923049112401, {\ldots}   
+         DecisionTreeClassifier\_28   \{'Urban\_or\_Rural\_Area\_1': 0.6970421801859727, {\ldots}   
+         DecisionTreeClassifier\_29   \{'Urban\_or\_Rural\_Area\_1': 0.3517779091153211, {\ldots}   
+         DecisionTreeClassifier\_30   \{'Urban\_or\_Rural\_Area\_2': 0.5419144377445076, {\ldots}   
+         DecisionTreeClassifier\_31   \{'Speed\_limit': 0.2946336494532042, 'Urban\_or\_{\ldots}   
+         DecisionTreeClassifier\_32   \{'Urban\_or\_Rural\_Area\_2': 0.7113259519664071, {\ldots}   
+         DecisionTreeClassifier\_33   \{'Speed\_limit': 0.34078632367140127, 'Road\_Typ{\ldots}   
+         DecisionTreeClassifier\_34   \{'Urban\_or\_Rural\_Area\_1': 0.7056313585581897, {\ldots}   
+         DecisionTreeClassifier\_35   \{'Urban\_or\_Rural\_Area\_1': 0.716638717389689, '{\ldots}   
+         DecisionTreeClassifier\_36   \{'Urban\_or\_Rural\_Area\_2': 0.720851960663978, '{\ldots}   
+         DecisionTreeClassifier\_37   \{'Urban\_or\_Rural\_Area\_2': 0.70508970221109, 'R{\ldots}   
+         DecisionTreeClassifier\_38   \{'Urban\_or\_Rural\_Area\_1': 0.5516163324337106, {\ldots}   
+         DecisionTreeClassifier\_39   \{'Urban\_or\_Rural\_Area\_2': 0.2977426895188476, {\ldots}   
+         DecisionTreeClassifier\_40   \{'Urban\_or\_Rural\_Area\_1': 0.38089981391071254,{\ldots}   
+         DecisionTreeClassifier\_41   \{'Urban\_or\_Rural\_Area\_2': 0.7069199747424726, {\ldots}   
+         DecisionTreeClassifier\_42   \{'Urban\_or\_Rural\_Area\_2': 0.7094907853207413, {\ldots}   
+         DecisionTreeClassifier\_43   \{'Urban\_or\_Rural\_Area\_2': 0.7141648558429515, {\ldots}   
+         DecisionTreeClassifier\_44   \{'Urban\_or\_Rural\_Area\_1': 0.7198434068610666, {\ldots}   
+         DecisionTreeClassifier\_45   \{'Speed\_limit': 0.2876930128635422, 'Urban\_or\_{\ldots}   
+         DecisionTreeClassifier\_46   \{'Urban\_or\_Rural\_Area\_2': 0.7148084158994514, {\ldots}   
+         DecisionTreeClassifier\_47   \{'Speed\_limit': 0.33428166028809053, 'Urban\_or{\ldots}   
+         DecisionTreeClassifier\_48   \{'Urban\_or\_Rural\_Area\_1': 0.34256341872036034,{\ldots}   
+         DecisionTreeClassifier\_49   \{'Urban\_or\_Rural\_Area\_1': 0.40424891715896877,{\ldots}   
+         DecisionTreeClassifier\_50   \{'Urban\_or\_Rural\_Area\_1': 0.6369027496467422, {\ldots}   
+         DecisionTreeClassifier\_51   \{'Urban\_or\_Rural\_Area\_2': 0.7052588844638291, {\ldots}   
+         DecisionTreeClassifier\_52   \{'Urban\_or\_Rural\_Area\_1': 0.6999551342756705, {\ldots}   
+         DecisionTreeClassifier\_53   \{'Urban\_or\_Rural\_Area\_2': 0.714706419785526, '{\ldots}   
+         DecisionTreeClassifier\_54   \{'Urban\_or\_Rural\_Area\_1': 0.7102077028110105, {\ldots}   
+         DecisionTreeClassifier\_55   \{'Speed\_limit': 0.3137878967877777, 'Urban\_or\_{\ldots}   
+         DecisionTreeClassifier\_56   \{'Urban\_or\_Rural\_Area\_2': 0.7049136405267769, {\ldots}   
+         DecisionTreeClassifier\_57   \{'Urban\_or\_Rural\_Area\_2': 0.703863438667525, '{\ldots}   
+         DecisionTreeClassifier\_58   \{'Urban\_or\_Rural\_Area\_2': 0.7401325824843338, {\ldots}   
+         DecisionTreeClassifier\_59   \{'Urban\_or\_Rural\_Area\_1': 0.7070886491650891, {\ldots}   
+         DecisionTreeClassifier\_60   \{'Urban\_or\_Rural\_Area\_2': 0.3207341060324231, {\ldots}   
+         DecisionTreeClassifier\_61   \{'Speed\_limit': 0.27569256950970206, 'Urban\_or{\ldots}   
+         DecisionTreeClassifier\_62   \{'Urban\_or\_Rural\_Area\_1': 0.7215830306722113, {\ldots}   
+         DecisionTreeClassifier\_63   \{'Urban\_or\_Rural\_Area\_1': 0.6913656777255688, {\ldots}   
+         DecisionTreeClassifier\_64   \{'Urban\_or\_Rural\_Area\_2': 0.3488093861233659, {\ldots}   
+         DecisionTreeClassifier\_65   \{'Urban\_or\_Rural\_Area\_2': 0.6208928249075838, {\ldots}   
+         DecisionTreeClassifier\_66   \{'Urban\_or\_Rural\_Area\_1': 0.5804002390701904, {\ldots}   
+         DecisionTreeClassifier\_67   \{'Urban\_or\_Rural\_Area\_1': 0.651191938333508, '{\ldots}   
+         DecisionTreeClassifier\_68   \{'Urban\_or\_Rural\_Area\_2': 0.5912168971701391, {\ldots}   
+         DecisionTreeClassifier\_69   \{'Urban\_or\_Rural\_Area\_2': 0.6897553224048443, {\ldots}   
+         DecisionTreeClassifier\_70   \{'Urban\_or\_Rural\_Area\_2': 0.7047273797552803, {\ldots}   
+         DecisionTreeClassifier\_71   \{'Urban\_or\_Rural\_Area\_1': 0.6247331926404884, {\ldots}   
+         DecisionTreeClassifier\_72   \{'Urban\_or\_Rural\_Area\_2': 0.7059856950809259, {\ldots}   
+         DecisionTreeClassifier\_73   \{'Urban\_or\_Rural\_Area\_1': 0.5915546922420992, {\ldots}   
+         DecisionTreeClassifier\_74   \{'Urban\_or\_Rural\_Area\_1': 0.7103845797678112, {\ldots}   
+         DecisionTreeClassifier\_75   \{'Urban\_or\_Rural\_Area\_2': 0.7117890902938601, {\ldots}   
+         DecisionTreeClassifier\_76   \{'Urban\_or\_Rural\_Area\_2': 0.693001705976988, '{\ldots}   
+         DecisionTreeClassifier\_77   \{'Urban\_or\_Rural\_Area\_1': 0.6922023056872189, {\ldots}   
+         DecisionTreeClassifier\_78   \{'Urban\_or\_Rural\_Area\_2': 0.7087688385201044, {\ldots}   
+         DecisionTreeClassifier\_79   \{'Urban\_or\_Rural\_Area\_2': 0.7097367770902893, {\ldots}   
+         DecisionTreeClassifier\_80   \{'Speed\_limit': 0.3181448745415733, 'Urban\_or\_{\ldots}   
+         DecisionTreeClassifier\_81   \{'Urban\_or\_Rural\_Area\_2': 0.7177704919124178, {\ldots}   
+         DecisionTreeClassifier\_82   \{'Urban\_or\_Rural\_Area\_1': 0.36994855986869446,{\ldots}   
+         DecisionTreeClassifier\_83   \{'Urban\_or\_Rural\_Area\_2': 0.36757396541030346,{\ldots}   
+         DecisionTreeClassifier\_84   \{'Urban\_or\_Rural\_Area\_2': 0.7040582374775328, {\ldots}   
+         DecisionTreeClassifier\_85   \{'Urban\_or\_Rural\_Area\_1': 0.2902591591467865, {\ldots}   
+         DecisionTreeClassifier\_86   \{'Urban\_or\_Rural\_Area\_1': 0.4109312674451703, {\ldots}   
+         DecisionTreeClassifier\_87   \{'Urban\_or\_Rural\_Area\_1': 0.5947601244341608, {\ldots}   
+         DecisionTreeClassifier\_88   \{'Urban\_or\_Rural\_Area\_1': 0.3462636191141448, {\ldots}   
+         DecisionTreeClassifier\_89   \{'Urban\_or\_Rural\_Area\_2': 0.7325013758295997, {\ldots}   
+         DecisionTreeClassifier\_90   \{'Urban\_or\_Rural\_Area\_1': 0.6687589401793754, {\ldots}   
+         DecisionTreeClassifier\_91   \{'Urban\_or\_Rural\_Area\_2': 0.6032814237409947, {\ldots}   
+         DecisionTreeClassifier\_92   \{'Road\_Type\_6': 0.31399211312690994, 'Speed\_li{\ldots}   
+         DecisionTreeClassifier\_93   \{'Urban\_or\_Rural\_Area\_1': 0.36013463049179356,{\ldots}   
+         DecisionTreeClassifier\_94   \{'Urban\_or\_Rural\_Area\_2': 0.7267864143190821, {\ldots}   
+         DecisionTreeClassifier\_95   \{'Speed\_limit': 0.3255076164335057, 'Urban\_or\_{\ldots}   
+         DecisionTreeClassifier\_96   \{'Urban\_or\_Rural\_Area\_2': 0.3786038813432142, {\ldots}   
+         DecisionTreeClassifier\_97   \{'Urban\_or\_Rural\_Area\_1': 0.33470812415957707,{\ldots}   
+         DecisionTreeClassifier\_98   \{'Urban\_or\_Rural\_Area\_2': 0.7028620360369461, {\ldots}   
+         DecisionTreeClassifier\_99   \{'Urban\_or\_Rural\_Area\_2': 0.7001986276835276, {\ldots}   
+         DecisionTreeClassifier\_100  \{'Urban\_or\_Rural\_Area\_1': 0.7069258340804395, {\ldots}   
+         
+                                                                              Features  \textbackslash{}
+         DecisionTreeClassifier\_1    Urban\_or\_Rural\_Area\_1,Speed\_limit,Road\_Type\_6,{\ldots}   
+         DecisionTreeClassifier\_2    Urban\_or\_Rural\_Area\_2,Road\_Type\_6,Road\_Type\_2,{\ldots}   
+         DecisionTreeClassifier\_3    Urban\_or\_Rural\_Area\_1,Speed\_limit,Road\_Type\_6,{\ldots}   
+         DecisionTreeClassifier\_4    Urban\_or\_Rural\_Area\_1,Road\_Type\_6,Road\_Type\_2,{\ldots}   
+         DecisionTreeClassifier\_5    Urban\_or\_Rural\_Area\_2,Road\_Type\_6,Junction\_Con{\ldots}   
+         DecisionTreeClassifier\_6    Road\_Type\_6,Urban\_or\_Rural\_Area\_2,Speed\_limit,{\ldots}   
+         DecisionTreeClassifier\_7    Urban\_or\_Rural\_Area\_1,Speed\_limit,Road\_Type\_6,{\ldots}   
+         DecisionTreeClassifier\_8    Urban\_or\_Rural\_Area\_2,Road\_Type\_1,Road\_Type\_3,{\ldots}   
+         DecisionTreeClassifier\_9    Speed\_limit,Urban\_or\_Rural\_Area\_1,Road\_Type\_6,{\ldots}   
+         DecisionTreeClassifier\_10   Urban\_or\_Rural\_Area\_1,Road\_Type\_6,Road\_Type\_1,{\ldots}   
+         DecisionTreeClassifier\_11   Urban\_or\_Rural\_Area\_1,Speed\_limit,Road\_Type\_6,{\ldots}   
+         DecisionTreeClassifier\_12   Urban\_or\_Rural\_Area\_1,Road\_Type\_6,Junction\_Con{\ldots}   
+         DecisionTreeClassifier\_13   Urban\_or\_Rural\_Area\_1,Road\_Type\_6,Road\_Type\_3,{\ldots}   
+         DecisionTreeClassifier\_14   Urban\_or\_Rural\_Area\_1,Road\_Type\_1,Road\_Type\_3,{\ldots}   
+         DecisionTreeClassifier\_15   Urban\_or\_Rural\_Area\_1,Road\_Type\_6,Junction\_Con{\ldots}   
+         DecisionTreeClassifier\_16   Urban\_or\_Rural\_Area\_2,Road\_Type\_1,Road\_Type\_3,{\ldots}   
+         DecisionTreeClassifier\_17   Urban\_or\_Rural\_Area\_2,Road\_Type\_6,Road\_Type\_2,{\ldots}   
+         DecisionTreeClassifier\_18   Speed\_limit,Urban\_or\_Rural\_Area\_2,Road\_Type\_6,{\ldots}   
+         DecisionTreeClassifier\_19   Urban\_or\_Rural\_Area\_1,Road\_Type\_6,Road\_Type\_3,{\ldots}   
+         DecisionTreeClassifier\_20   Urban\_or\_Rural\_Area\_1,Junction\_Control\_2,Road\_{\ldots}   
+         DecisionTreeClassifier\_21   Urban\_or\_Rural\_Area\_2,Road\_Type\_1,Road\_Type\_3,{\ldots}   
+         DecisionTreeClassifier\_22   Urban\_or\_Rural\_Area\_2,Road\_Type\_1,Road\_Type\_6,{\ldots}   
+         DecisionTreeClassifier\_23   Urban\_or\_Rural\_Area\_2,Road\_Type\_1,Speed\_limit,{\ldots}   
+         DecisionTreeClassifier\_24   Urban\_or\_Rural\_Area\_1,Road\_Type\_6,Speed\_limit,{\ldots}   
+         DecisionTreeClassifier\_25   Urban\_or\_Rural\_Area\_2,Road\_Type\_6,Day\_of\_Week\_{\ldots}   
+         DecisionTreeClassifier\_26   Urban\_or\_Rural\_Area\_2,Road\_Type\_6,Junction\_Con{\ldots}   
+         DecisionTreeClassifier\_27   Urban\_or\_Rural\_Area\_2,Road\_Type\_3,Road\_Type\_1,{\ldots}   
+         DecisionTreeClassifier\_28   Urban\_or\_Rural\_Area\_1,Road\_Type\_6,Road\_Type\_2,{\ldots}   
+         DecisionTreeClassifier\_29   Urban\_or\_Rural\_Area\_1,Speed\_limit,Road\_Type\_6,{\ldots}   
+         DecisionTreeClassifier\_30   Urban\_or\_Rural\_Area\_2,Road\_Type\_1,Junction\_Con{\ldots}   
+         DecisionTreeClassifier\_31   Speed\_limit,Urban\_or\_Rural\_Area\_1,Road\_Type\_6,{\ldots}   
+         DecisionTreeClassifier\_32   Urban\_or\_Rural\_Area\_2,Road\_Type\_1,Road\_Type\_3,{\ldots}   
+         DecisionTreeClassifier\_33   Speed\_limit,Road\_Type\_6,Urban\_or\_Rural\_Area\_2,{\ldots}   
+         DecisionTreeClassifier\_34   Urban\_or\_Rural\_Area\_1,Road\_Type\_3,Road\_Type\_1,{\ldots}   
+         DecisionTreeClassifier\_35   Urban\_or\_Rural\_Area\_1,Road\_Type\_1,Road\_Type\_3,{\ldots}   
+         DecisionTreeClassifier\_36   Urban\_or\_Rural\_Area\_2,Road\_Type\_1,Road\_Type\_3,{\ldots}   
+         DecisionTreeClassifier\_37   Urban\_or\_Rural\_Area\_2,Road\_Type\_3,Road\_Type\_1,{\ldots}   
+         DecisionTreeClassifier\_38   Urban\_or\_Rural\_Area\_1,Road\_Type\_6,Junction\_Con{\ldots}   
+         DecisionTreeClassifier\_39   Urban\_or\_Rural\_Area\_2,Speed\_limit,Urban\_or\_Rur{\ldots}   
+         DecisionTreeClassifier\_40   Urban\_or\_Rural\_Area\_1,Speed\_limit,Road\_Type\_6,{\ldots}   
+         DecisionTreeClassifier\_41   Urban\_or\_Rural\_Area\_2,Road\_Type\_6,Road\_Type\_3,{\ldots}   
+         DecisionTreeClassifier\_42   Urban\_or\_Rural\_Area\_2,Road\_Type\_6,Urban\_or\_Rur{\ldots}   
+         DecisionTreeClassifier\_43   Urban\_or\_Rural\_Area\_2,Road\_Type\_1,Road\_Type\_3,{\ldots}   
+         DecisionTreeClassifier\_44   Urban\_or\_Rural\_Area\_1,Road\_Type\_6,Road\_Type\_3,{\ldots}   
+         DecisionTreeClassifier\_45   Speed\_limit,Urban\_or\_Rural\_Area\_1,Urban\_or\_Rur{\ldots}   
+         DecisionTreeClassifier\_46   Urban\_or\_Rural\_Area\_2,Road\_Type\_6,Speed\_limit,{\ldots}   
+         DecisionTreeClassifier\_47   Speed\_limit,Urban\_or\_Rural\_Area\_2,Road\_Type\_6,{\ldots}   
+         DecisionTreeClassifier\_48   Urban\_or\_Rural\_Area\_1,Road\_Type\_6,Speed\_limit,{\ldots}   
+         DecisionTreeClassifier\_49   Urban\_or\_Rural\_Area\_1,Speed\_limit,Road\_Type\_1,{\ldots}   
+         DecisionTreeClassifier\_50   Urban\_or\_Rural\_Area\_1,Road\_Type\_6,Junction\_Con{\ldots}   
+         DecisionTreeClassifier\_51   Urban\_or\_Rural\_Area\_2,Road\_Type\_1,Road\_Type\_6,{\ldots}   
+         DecisionTreeClassifier\_52   Urban\_or\_Rural\_Area\_1,Road\_Type\_1,Road\_Type\_3,{\ldots}   
+         DecisionTreeClassifier\_53   Urban\_or\_Rural\_Area\_2,Road\_Type\_1,Road\_Type\_3,{\ldots}   
+         DecisionTreeClassifier\_54   Urban\_or\_Rural\_Area\_1,Road\_Type\_1,Road\_Type\_6,{\ldots}   
+         DecisionTreeClassifier\_55   Speed\_limit,Urban\_or\_Rural\_Area\_2,Road\_Type\_6,{\ldots}   
+         DecisionTreeClassifier\_56   Urban\_or\_Rural\_Area\_2,Road\_Type\_6,First\_Road\_C{\ldots}   
+         DecisionTreeClassifier\_57   Urban\_or\_Rural\_Area\_2,Road\_Type\_6,Junction\_Con{\ldots}   
+         DecisionTreeClassifier\_58   Urban\_or\_Rural\_Area\_2,Road\_Type\_3,Road\_Type\_1,{\ldots}   
+         DecisionTreeClassifier\_59   Urban\_or\_Rural\_Area\_1,Road\_Type\_6,Road\_Type\_1,{\ldots}   
+         DecisionTreeClassifier\_60   Urban\_or\_Rural\_Area\_2,Speed\_limit,Road\_Type\_1,{\ldots}   
+         DecisionTreeClassifier\_61   Speed\_limit,Urban\_or\_Rural\_Area\_1,Road\_Type\_6,{\ldots}   
+         DecisionTreeClassifier\_62   Urban\_or\_Rural\_Area\_1,Road\_Type\_1,Road\_Type\_3,{\ldots}   
+         DecisionTreeClassifier\_63   Urban\_or\_Rural\_Area\_1,Road\_Type\_6,Speed\_limit,{\ldots}   
+         DecisionTreeClassifier\_64   Urban\_or\_Rural\_Area\_2,Speed\_limit,Road\_Type\_6,{\ldots}   
+         DecisionTreeClassifier\_65   Urban\_or\_Rural\_Area\_2,Road\_Type\_3,Road\_Type\_1,{\ldots}   
+         DecisionTreeClassifier\_66   Urban\_or\_Rural\_Area\_1,Junction\_Control\_2,Road\_{\ldots}   
+         DecisionTreeClassifier\_67   Urban\_or\_Rural\_Area\_1,Road\_Type\_1,Road\_Type\_6,{\ldots}   
+         DecisionTreeClassifier\_68   Urban\_or\_Rural\_Area\_2,Road\_Type\_6,Junction\_Con{\ldots}   
+         DecisionTreeClassifier\_69   Urban\_or\_Rural\_Area\_2,Road\_Type\_6,Junction\_Con{\ldots}   
+         DecisionTreeClassifier\_70   Urban\_or\_Rural\_Area\_2,Road\_Type\_6,Light\_Condit{\ldots}   
+         DecisionTreeClassifier\_71   Urban\_or\_Rural\_Area\_1,Junction\_Control\_2,Road\_{\ldots}   
+         DecisionTreeClassifier\_72   Urban\_or\_Rural\_Area\_2,Road\_Type\_6,Road\_Type\_3,{\ldots}   
+         DecisionTreeClassifier\_73   Urban\_or\_Rural\_Area\_1,Road\_Type\_6,Road\_Type\_3,{\ldots}   
+         DecisionTreeClassifier\_74   Urban\_or\_Rural\_Area\_1,Road\_Type\_6,Speed\_limit,{\ldots}   
+         DecisionTreeClassifier\_75   Urban\_or\_Rural\_Area\_2,Road\_Type\_1,Road\_Type\_6,{\ldots}   
+         DecisionTreeClassifier\_76   Urban\_or\_Rural\_Area\_2,Road\_Type\_6,Road\_Type\_2,{\ldots}   
+         DecisionTreeClassifier\_77   Urban\_or\_Rural\_Area\_1,Road\_Type\_1,Road\_Type\_3,{\ldots}   
+         DecisionTreeClassifier\_78   Urban\_or\_Rural\_Area\_2,Road\_Type\_1,Road\_Type\_3,{\ldots}   
+         DecisionTreeClassifier\_79   Urban\_or\_Rural\_Area\_2,Road\_Type\_1,Road\_Type\_3,{\ldots}   
+         DecisionTreeClassifier\_80   Speed\_limit,Urban\_or\_Rural\_Area\_1,Junction\_Con{\ldots}   
+         DecisionTreeClassifier\_81   Urban\_or\_Rural\_Area\_2,Road\_Type\_6,Road\_Type\_1,{\ldots}   
+         DecisionTreeClassifier\_82   Urban\_or\_Rural\_Area\_1,Speed\_limit,Road\_Type\_6,{\ldots}   
+         DecisionTreeClassifier\_83   Urban\_or\_Rural\_Area\_2,Road\_Type\_6,Speed\_limit,{\ldots}   
+         DecisionTreeClassifier\_84   Urban\_or\_Rural\_Area\_2,Road\_Type\_6,Road\_Type\_3,{\ldots}   
+         DecisionTreeClassifier\_85   Urban\_or\_Rural\_Area\_1,Speed\_limit,Road\_Type\_6,{\ldots}   
+         DecisionTreeClassifier\_86   Urban\_or\_Rural\_Area\_1,Speed\_limit,Road\_Type\_1,{\ldots}   
+         DecisionTreeClassifier\_87   Urban\_or\_Rural\_Area\_1,Road\_Type\_6,Junction\_Con{\ldots}   
+         DecisionTreeClassifier\_88   Urban\_or\_Rural\_Area\_1,Speed\_limit,Junction\_Con{\ldots}   
+         DecisionTreeClassifier\_89   Urban\_or\_Rural\_Area\_2,Road\_Type\_1,Speed\_limit,{\ldots}   
+         DecisionTreeClassifier\_90   Urban\_or\_Rural\_Area\_1,Road\_Type\_6,Junction\_Con{\ldots}   
+         DecisionTreeClassifier\_91   Urban\_or\_Rural\_Area\_2,Road\_Type\_6,Junction\_Con{\ldots}   
+         DecisionTreeClassifier\_92   Road\_Type\_6,Speed\_limit,Urban\_or\_Rural\_Area\_1,{\ldots}   
+         DecisionTreeClassifier\_93   Urban\_or\_Rural\_Area\_1,Speed\_limit,Junction\_Con{\ldots}   
+         DecisionTreeClassifier\_94   Urban\_or\_Rural\_Area\_2,Road\_Type\_6,Urban\_or\_Rur{\ldots}   
+         DecisionTreeClassifier\_95   Speed\_limit,Urban\_or\_Rural\_Area\_1,Urban\_or\_Rur{\ldots}   
+         DecisionTreeClassifier\_96   Urban\_or\_Rural\_Area\_2,Speed\_limit,Road\_Type\_6,{\ldots}   
+         DecisionTreeClassifier\_97   Urban\_or\_Rural\_Area\_1,Speed\_limit,Road\_Type\_6,{\ldots}   
+         DecisionTreeClassifier\_98   Urban\_or\_Rural\_Area\_2,Road\_Type\_1,Speed\_limit,{\ldots}   
+         DecisionTreeClassifier\_99   Urban\_or\_Rural\_Area\_2,Road\_Type\_6,Light\_Condit{\ldots}   
+         DecisionTreeClassifier\_100  Urban\_or\_Rural\_Area\_1,Road\_Type\_6,Road\_Type\_2,{\ldots}   
+         
+                                                                               Weights  
+         DecisionTreeClassifier\_1    0.33401422472434794,0.24164538384009696,0.1482{\ldots}  
+         DecisionTreeClassifier\_2    0.7252390616277096,0.26580658908743465,0.00394{\ldots}  
+         DecisionTreeClassifier\_3    0.2972421521202719,0.26401460162070967,0.17838{\ldots}  
+         DecisionTreeClassifier\_4    0.7175233614212883,0.2695194326057582,0.007372{\ldots}  
+         DecisionTreeClassifier\_5    0.6191037811355886,0.2735857045543231,0.085592{\ldots}  
+         DecisionTreeClassifier\_6    0.3424703219683284,0.28407908267280185,0.26651{\ldots}  
+         DecisionTreeClassifier\_7    0.3010601704831565,0.2886272735556115,0.257934{\ldots}  
+         DecisionTreeClassifier\_8    0.6922504032444525,0.11679708599796267,0.11544{\ldots}  
+         DecisionTreeClassifier\_9    0.32505298265858784,0.2087967071694195,0.16567{\ldots}  
+         DecisionTreeClassifier\_10   0.7408303457076333,0.142002417552861,0.1047320{\ldots}  
+         DecisionTreeClassifier\_11   0.3523744778981918,0.23600587346695473,0.18670{\ldots}  
+         DecisionTreeClassifier\_12   0.6083941207354211,0.26344195465768727,0.09317{\ldots}  
+         DecisionTreeClassifier\_13   0.6015767635063494,0.15524409358333535,0.10207{\ldots}  
+         DecisionTreeClassifier\_14   0.5901756899860242,0.13512191370143978,0.10802{\ldots}  
+         DecisionTreeClassifier\_15   0.6274896891837177,0.2730892066005476,0.086674{\ldots}  
+         DecisionTreeClassifier\_16   0.699373629284075,0.1268578885201291,0.1047274{\ldots}  
+         DecisionTreeClassifier\_17   0.7184025671826624,0.2687033903247063,0.005038{\ldots}  
+         DecisionTreeClassifier\_18   0.3555348059160004,0.249458919774224,0.1781347{\ldots}  
+         DecisionTreeClassifier\_19   0.7038270757957759,0.1660390091332405,0.113637{\ldots}  
+         DecisionTreeClassifier\_20   0.5733779126102362,0.12460084195859503,0.09737{\ldots}  
+         DecisionTreeClassifier\_21   0.6958253693823018,0.12469657658697839,0.11802{\ldots}  
+         DecisionTreeClassifier\_22   0.7065397608858108,0.11735927699635054,0.07550{\ldots}  
+         DecisionTreeClassifier\_23   0.7223721974941886,0.12683305067195427,0.08002{\ldots}  
+         DecisionTreeClassifier\_24   0.7022099570820137,0.13693333527280424,0.07573{\ldots}  
+         DecisionTreeClassifier\_25   0.7173843520366301,0.2750104126747767,0.002556{\ldots}  
+         DecisionTreeClassifier\_26   0.6376165631954175,0.2605614801394394,0.052084{\ldots}  
+         DecisionTreeClassifier\_27   0.7330923049112401,0.14066060840919065,0.10070{\ldots}  
+         DecisionTreeClassifier\_28   0.6970421801859727,0.2920290216319461,0.005064{\ldots}  
+         DecisionTreeClassifier\_29   0.3517779091153211,0.30236915054531804,0.17266{\ldots}  
+         DecisionTreeClassifier\_30   0.5419144377445076,0.10028991359537875,0.08329{\ldots}  
+         DecisionTreeClassifier\_31   0.2946336494532042,0.27852026293018717,0.23348{\ldots}  
+         DecisionTreeClassifier\_32   0.7113259519664071,0.09656340048618976,0.08691{\ldots}  
+         DecisionTreeClassifier\_33   0.34078632367140127,0.22965867877362667,0.1774{\ldots}  
+         DecisionTreeClassifier\_34   0.7056313585581897,0.11631832992796082,0.09394{\ldots}  
+         DecisionTreeClassifier\_35   0.716638717389689,0.1439188060017873,0.1023924{\ldots}  
+         DecisionTreeClassifier\_36   0.720851960663978,0.1196750883782051,0.1030867{\ldots}  
+         DecisionTreeClassifier\_37   0.70508970221109,0.13536059446506682,0.1234198{\ldots}  
+         DecisionTreeClassifier\_38   0.5516163324337106,0.1761529604064267,0.112528{\ldots}  
+         DecisionTreeClassifier\_39   0.2977426895188476,0.28445313647570647,0.11278{\ldots}  
+         DecisionTreeClassifier\_40   0.38089981391071254,0.3002324565148323,0.13797{\ldots}  
+         DecisionTreeClassifier\_41   0.7069199747424726,0.15427035818627555,0.10517{\ldots}  
+         DecisionTreeClassifier\_42   0.7094907853207413,0.2765463025729027,0.005890{\ldots}  
+         DecisionTreeClassifier\_43   0.7141648558429515,0.12560996541962982,0.06923{\ldots}  
+         DecisionTreeClassifier\_44   0.7198434068610666,0.14916128540598575,0.09798{\ldots}  
+         DecisionTreeClassifier\_45   0.2876930128635422,0.2771975751414339,0.148145{\ldots}  
+         DecisionTreeClassifier\_46   0.7148084158994514,0.16865678064923545,0.06945{\ldots}  
+         DecisionTreeClassifier\_47   0.33428166028809053,0.22682805638541947,0.1584{\ldots}  
+         DecisionTreeClassifier\_48   0.34256341872036034,0.34178989168049057,0.2727{\ldots}  
+         DecisionTreeClassifier\_49   0.40424891715896877,0.23704950249961212,0.1336{\ldots}  
+         DecisionTreeClassifier\_50   0.6369027496467422,0.2417991366253272,0.073656{\ldots}  
+         DecisionTreeClassifier\_51   0.7052588844638291,0.13511331907435137,0.12727{\ldots}  
+         DecisionTreeClassifier\_52   0.6999551342756705,0.15216979443368792,0.10792{\ldots}  
+         DecisionTreeClassifier\_53   0.714706419785526,0.1321457336444801,0.1133114{\ldots}  
+         DecisionTreeClassifier\_54   0.7102077028110105,0.13133674111859908,0.07052{\ldots}  
+         DecisionTreeClassifier\_55   0.3137878967877777,0.2694364270381186,0.247263{\ldots}  
+         DecisionTreeClassifier\_56   0.7049136405267769,0.25033923004522235,0.03341{\ldots}  
+         DecisionTreeClassifier\_57   0.703863438667525,0.2872044738562245,0.0038176{\ldots}  
+         DecisionTreeClassifier\_58   0.7401325824843338,0.12858168614676568,0.10781{\ldots}  
+         DecisionTreeClassifier\_59   0.7070886491650891,0.12317793371726948,0.10615{\ldots}  
+         DecisionTreeClassifier\_60   0.3207341060324231,0.2915668259772379,0.106134{\ldots}  
+         DecisionTreeClassifier\_61   0.27569256950970206,0.2614737783762222,0.23017{\ldots}  
+         DecisionTreeClassifier\_62   0.7215830306722113,0.13039167075486371,0.12069{\ldots}  
+         DecisionTreeClassifier\_63   0.6913656777255688,0.20993092606475625,0.08763{\ldots}  
+         DecisionTreeClassifier\_64   0.3488093861233659,0.25339580320366395,0.14171{\ldots}  
+         DecisionTreeClassifier\_65   0.6208928249075838,0.13340679953080317,0.09872{\ldots}  
+         DecisionTreeClassifier\_66   0.5804002390701904,0.10068238007205234,0.09348{\ldots}  
+         DecisionTreeClassifier\_67   0.651191938333508,0.1217696311724352,0.0863055{\ldots}  
+         DecisionTreeClassifier\_68   0.5912168971701391,0.17261778675108236,0.12206{\ldots}  
+         DecisionTreeClassifier\_69   0.6897553224048443,0.29829311808373976,0.00392{\ldots}  
+         DecisionTreeClassifier\_70   0.7047273797552803,0.28096863454005877,0.00446{\ldots}  
+         DecisionTreeClassifier\_71   0.6247331926404884,0.10957239378883347,0.10510{\ldots}  
+         DecisionTreeClassifier\_72   0.7059856950809259,0.14150188561218907,0.11231{\ldots}  
+         DecisionTreeClassifier\_73   0.5915546922420992,0.15966446255314556,0.10475{\ldots}  
+         DecisionTreeClassifier\_74   0.7103845797678112,0.1818085667199936,0.060085{\ldots}  
+         DecisionTreeClassifier\_75   0.7117890902938601,0.12998072093163338,0.07350{\ldots}  
+         DecisionTreeClassifier\_76   0.693001705976988,0.2966766994631212,0.0024857{\ldots}  
+         DecisionTreeClassifier\_77   0.6922023056872189,0.12121342018059911,0.11120{\ldots}  
+         DecisionTreeClassifier\_78   0.7087688385201044,0.12779258756585812,0.10913{\ldots}  
+         DecisionTreeClassifier\_79   0.7097367770902893,0.13003665450644727,0.10861{\ldots}  
+         DecisionTreeClassifier\_80   0.3181448745415733,0.2901261723398042,0.118666{\ldots}  
+         DecisionTreeClassifier\_81   0.7177704919124178,0.1089541516090026,0.106607{\ldots}  
+         DecisionTreeClassifier\_82   0.36994855986869446,0.2545834977831393,0.17012{\ldots}  
+         DecisionTreeClassifier\_83   0.36757396541030346,0.2763171042049598,0.25478{\ldots}  
+         DecisionTreeClassifier\_84   0.7040582374775328,0.18780080899981677,0.08132{\ldots}  
+         DecisionTreeClassifier\_85   0.2902591591467865,0.2793904847380319,0.224071{\ldots}  
+         DecisionTreeClassifier\_86   0.4109312674451703,0.2846346789605108,0.135808{\ldots}  
+         DecisionTreeClassifier\_87   0.5947601244341608,0.25859095746848226,0.11817{\ldots}  
+         DecisionTreeClassifier\_88   0.3462636191141448,0.2836446844628442,0.119073{\ldots}  
+         DecisionTreeClassifier\_89   0.7325013758295997,0.1020071927226571,0.076642{\ldots}  
+         DecisionTreeClassifier\_90   0.6687589401793754,0.23747923873333987,0.08031{\ldots}  
+         DecisionTreeClassifier\_91   0.6032814237409947,0.2498186106117058,0.058983{\ldots}  
+         DecisionTreeClassifier\_92   0.31399211312690994,0.28058802080431533,0.1869{\ldots}  
+         DecisionTreeClassifier\_93   0.36013463049179356,0.23902993423221805,0.1191{\ldots}  
+         DecisionTreeClassifier\_94   0.7267864143190821,0.26113173581789245,0.00382{\ldots}  
+         DecisionTreeClassifier\_95   0.3255076164335057,0.3087493567943591,0.147461{\ldots}  
+         DecisionTreeClassifier\_96   0.3786038813432142,0.3426377620858031,0.271553{\ldots}  
+         DecisionTreeClassifier\_97   0.33470812415957707,0.30639277553595573,0.2267{\ldots}  
+         DecisionTreeClassifier\_98   0.7028620360369461,0.1259117732263596,0.076473{\ldots}  
+         DecisionTreeClassifier\_99   0.7001986276835276,0.25044477586248426,0.03463{\ldots}  
+         DecisionTreeClassifier\_100  0.7069258340804395,0.2811827654329101,0.004437{\ldots}  
+\end{Verbatim}
+            
+    \hypertarget{conclusions}{%
+\subsection{9. Conclusions:}\label{conclusions}}
+
+In the 6th section i.e., Feature Importance, we can clearly got to know
+that features like Urban\_or\_Rural\_Area\_1, Urban\_or\_Rural\_Area\_2,
+Road\_Type\_6, Speed\_limit, Road\_Type\_1, Road\_Type\_3,
+Junction\_Control\_2, First\_Road\_Class, Road\_Type\_7,
+Junction\_Control\_0, Junction\_Control\_4,Road\_Type\_2 and
+Day\_of\_Week\_4 are more responsible for accidents. We can visualize
+these features in a table:
+
+Sl no.
+
+Key Features
+
+1
+
+Urban\_or\_Rural\_Area\_1
+
+2
+
+Urban\_or\_Rural\_Area\_2
+
+3
+
+Road\_Type\_6
+
+4
+
+Speed\_limit
+
+5
+
+Road\_Type\_1
+
+6
+
+Road\_Type\_3
+
+7
+
+Junction\_Control\_2
+
+8
+
+First\_Road\_Class
+
+9
+
+Road\_Type\_7
+
+10
+
+Junction\_Control\_0
+
+11
+
+Junction\_Control\_4
+
+12
+
+Road\_Type\_2
+
+13
+
+Day\_of\_Week\_4
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
